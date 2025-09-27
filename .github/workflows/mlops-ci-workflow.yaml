@@ -42,7 +42,7 @@ jobs:
     - name: Mlflow setup
       run: |
         docker pull ghcr.io/mlflow/mlflow:latest
-        docker run -d -p 5555:5000  ghcr.io/mlflow/mlflow:latest \
+        docker run -d -p 5555:5000 --name mlflow-server ghcr.io/mlflow/mlflow:latest \
           mlflow server --host 0.0.0.0 \
           --backend-store-uri sqlite:///mlflow.db \
           --default-artifact-root /tmp/mlruns
@@ -54,3 +54,10 @@ jobs:
            --data data/processed/feature_engineered_data.csv \
            --models-dir models/trained/ \
            --mlflow-tracking-uri http://mlflow:5555
+
+    
+    - name: Mlflow Container cleanup
+      run: |
+        docker stop mlflow-server
+        docker rm mlflow-server
+        docker rmi ghcr.io/mlflow/mlflow:latest
