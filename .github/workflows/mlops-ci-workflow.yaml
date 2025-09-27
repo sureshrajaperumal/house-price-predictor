@@ -53,7 +53,7 @@ jobs:
            --config configs/model_config.yaml \
            --data data/processed/feature_engineered_data.csv \
            --models-dir models/trained/ \
-           --mlflow-tracking-uri http://mlflow-server:5555
+           --mlflow-tracking-uri http://localhost:5555
 
     
     - name: Mlflow Container cleanup
