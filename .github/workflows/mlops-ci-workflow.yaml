@@ -52,7 +52,7 @@ jobs:
         python src/models/train_model.py \
            --config configs/model_config.yaml \
            --data data/processed/feature_engineered_data.csv \
-           --models-dir models/trained/ \
+           --models-dir models/trained \
            --mlflow-tracking-uri http://localhost:5555
 
     
