@@ -77,4 +77,4 @@ jobs:
         push: true
         tags: psureshraja/fastapi:{{ github.sha }}
         context: " . "
-        file: "Dockerfile
+        file: "Dockerfile"
