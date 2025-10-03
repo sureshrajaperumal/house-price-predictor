@@ -1,0 +1,21 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: house-price-api-monitor
+  labels:
+    # 1. Standard application label
+    app: house-price-predictor
+    # 2. Match the label used by the Prometheus Operator to find ServiceMonitors
+    release: prom 
+spec:
+  selector:
+    matchLabels:
+      app: model # This should match the label on your Service that exposes the API
+  namespaceSelector:
+    matchNames:
+      - default
+  endpoints:
+    - port: metrics # Use the name of the port defined in your Service (e.g., http)
+      path: /
+      interval: 15s
+      scrapeTimeout: 10s

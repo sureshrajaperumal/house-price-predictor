@@ -1,0 +1,16 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: cpu-test-autoscaler
+  namespace: default
+spec:
+  scaleTargetRef:
+    name: model
+  minReplicaCount: 1
+  maxReplicaCount: 3
+  triggers:
+    - type: cpu
+      metadata:
+        # Use averageValue for Deployments
+        averageValue: "50" 
+        # Optional: You can also use 'type: Utilization' here if you want to use the HPA metric type directly

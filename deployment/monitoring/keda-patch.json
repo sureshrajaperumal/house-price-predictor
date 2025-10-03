@@ -1,0 +1,15 @@
+{
+  "spec": {
+    "triggers": [
+      {
+        "type": "Prometheus",
+        "metadata": {
+          "server": "http://prom-kube-prometheus-stack-prometheus.monitoring.svc:9090",
+          "metric": "p95_request_latency",
+          "threshold": "0.5",
+          "query": "histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket[1m])) by (le))"
+        }
+      }
+    ]
+  }
+}
